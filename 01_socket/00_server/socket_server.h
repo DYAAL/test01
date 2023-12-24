@@ -16,6 +16,7 @@ public:
     void socket_accept();
     int socket_in_one(int domain, int type, int protocol, std::string ip_address, int port);
     int socket_in_one(int domain, int type, int protocol, int port);
+    int print_client_addr();
     int listen_fd;
     int communication_fd;
     sockaddr_in serv_sockaddr;

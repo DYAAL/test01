@@ -76,10 +76,4 @@ int Socket_Client::socket_in_one(int domain, int type, int protocol, int port)
     return 0;
 }
 
-int Socket_Client::print_client_addr()
-{
-    char sIP[16];
-    inet_ntop(AF_INET, &client_sockaddr.sin_addr.s_addr, sIP, sizeof(sIP));
-    std::cout<<"client--> ip_address == "<<sIP<<std::endl;
-    std::cout<<"client--> port == "<<client_sockaddr.sin_port<<std::endl;
-}
+

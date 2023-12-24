@@ -9,6 +9,7 @@ int main()
     while (1) {
         Socket_Server server;
         int ret = server.socket_in_one(AF_INET, SOCK_STREAM, 0, 4567);
+        server.print_client_addr();
         if (ret < 0) {
             std::cout << "in main_server, something is wrong!" << std::endl;
         }
@@ -26,6 +27,7 @@ int main()
                 buffer[i] = toupper(buffer[i]);
             }
             write(server.communication_fd, buffer, word_num);
+            
         }
         close(server.communication_fd);
         close(server.listen_fd);

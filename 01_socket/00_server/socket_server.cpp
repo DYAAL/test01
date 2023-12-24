@@ -1,6 +1,7 @@
 #include "socket_server.h"
 #include <arpa/inet.h>
 #include <memory>
+#include <netinet/in.h>
 #include <strings.h>
 #include <sys/socket.h>
 
@@ -82,6 +83,13 @@ int Socket_Server::socket_in_one(int domain, int type, int protocol, int port)
     listen(this->listen_fd, 128);
     socket_accept();
     return 0;
+}
+int Socket_Server::print_client_addr()
+{
+    char sIP[16];
+    inet_ntop(AF_INET, &client_sockaddr.sin_addr.s_addr, sIP, sizeof(sIP));
+    std::cout<<"client--> ip_address == "<<sIP<<std::endl;
+    std::cout<<"client--> port == "<<ntohs(client_sockaddr.sin_port)<<std::endl;
 }
 
 Socket_Server::~Socket_Server()

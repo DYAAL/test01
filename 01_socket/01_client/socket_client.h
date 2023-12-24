@@ -13,7 +13,7 @@ public:
     int socket_connect(std::string ip_address, int port);
     int socket_in_one(int domain, int type, int protocol, std::string ip_address, int port);
     int socket_in_one(int domain, int type, int protocol, int port);
-    int print_client_addr();
+    
 
     int communication_fd;
     sockaddr_in client_sockaddr;
