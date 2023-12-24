@@ -32,5 +32,5 @@ clean_middle :
 	
 .PHONY : format
 format : 
-	clang-format -style=google -i $(SOURCE1) $(SOURCE2) $(SOURCE2)
+	clang-format -style=WebKit -i $(SOURCE1) $(SOURCE2) $(SOURCE2)
 	

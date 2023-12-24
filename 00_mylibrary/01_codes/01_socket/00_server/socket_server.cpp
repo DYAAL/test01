@@ -2,7 +2,6 @@
 #include <arpa/inet.h>
 #include <memory>
 #include <strings.h>
-#include <sys/socket.h>
 
 Socket_Server::Socket_Server()
 {
@@ -38,7 +37,7 @@ int Socket_Server::socket_bind(int port)
     this->serv_sockaddr.sin_family = AF_INET;
     this->serv_sockaddr.sin_port = htons(port);
     this->serv_sockaddr.sin_addr.s_addr = htonl(INADDR_ANY);
-    sockaddr* addr = reinterpret_cast<sockaddr*>(&(this->serv_sockaddr));
+    sockaddr* addr = reinterpret_cast<sockaddr*>(&this->serv_sockaddr);
     int ret = bind(listen_fd, addr, sizeof(*addr));
     if (ret < 0) {
         perror("binding failed");
@@ -49,9 +48,8 @@ int Socket_Server::socket_bind(int port)
 
 void Socket_Server::socket_accept()
 {   
-    socklen_t length = sizeof(this->client_sockaddr);
-    sockaddr* addr = reinterpret_cast<sockaddr*>(&this->client_sockaddr);
-    this->communication_fd = accept(this->listen_fd, addr, &length);
+
+    this->communication_fd = accept(this->listen_fd, nullptr, nullptr);
 }
 
 int Socket_Server::socket_in_one(int domain, int type, int protocol, std::string ip_address, int port)
