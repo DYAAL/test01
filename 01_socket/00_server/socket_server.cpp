@@ -1,11 +1,6 @@
 #include "socket_server.h"
-#include <cstdio>
-#include <iostream>
 #include <memory>
-#include <netinet/in.h>
 #include <strings.h>
-#include <sys/socket.h>
-#include <sys/types.h>
 
 Socket_Server::Socket_Server()
 {
@@ -38,7 +33,6 @@ int Socket_Server::socket_bind(int listen_fd, int addr_0for_auto, int port)
     return 0;
 }
 
-
 void Socket_Server::socket_accept(int listen_fd)
 {
     this->communication_fd = accept(this->listen_fd, nullptr, nullptr);
@@ -47,7 +41,19 @@ void Socket_Server::socket_accept(int listen_fd)
 int Socket_Server::socket_in_one(int domain, int type, int protocol, int addr_0for_auto, int port)
 {
     int ret = socket_create(domain, type, protocol);
+    if (ret < 0) {
+        return -1;
+    }
+    ret = socket_bind(this->listen_fd, addr_0for_auto, port);
+    if (ret < 0) {
+        return -1;
+    }
+    listen(this->listen_fd,128);
+    socket_accept(this->listen_fd);
+    return 0;
 }
+
+
 
 Socket_Server::~Socket_Server()
 {
