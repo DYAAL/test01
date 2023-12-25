@@ -75,5 +75,3 @@ int Socket_Client::socket_in_one(int domain, int type, int protocol, int port)
     }
     return 0;
 }
-
-

@@ -90,6 +90,7 @@ int Socket_Server::print_client_addr()
     inet_ntop(AF_INET, &client_sockaddr.sin_addr.s_addr, sIP, sizeof(sIP));
     std::cout<<"client--> ip_address == "<<sIP<<std::endl;
     std::cout<<"client--> port == "<<ntohs(client_sockaddr.sin_port)<<std::endl;
+    return 0;
 }
 
 Socket_Server::~Socket_Server()
